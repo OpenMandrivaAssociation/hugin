@@ -26,6 +26,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires: 	libpng-devel
 BuildRequires:	zip
+BuildRequires: desktop-file-utils
 
 Requires:	pano12
 Requires:       enblend
