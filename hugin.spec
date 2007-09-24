@@ -85,7 +85,7 @@ EOF
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
-  --add-category="X-MandrivaLinux-Multimedia-Graphics" \
+  --add-category="X-MandrivaLinux-Multimedia-Graphics;X-MandrivaLinux-CrossDesktop;" \
   --add-category="Photography" \
   --add-category="Graphics" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
