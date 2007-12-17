@@ -16,7 +16,6 @@ Source13: 	%{name}.48.png
 License: 	GPL
 Group: 		Graphics
 Url: 		http://hugin.sourceforge.net
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: 	libboost-devel
 BuildRequires: 	pano12-devel >= 2.8.1
 BuildRequires: 	fftw2-devel
