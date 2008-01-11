@@ -73,16 +73,6 @@ install -m644 %{SOURCE12} -D %buildroot%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %buildroot%{_liconsdir}/%{name}.png
 
 # menu entries
-mkdir -p  %buildroot%{_menudir}
-cat << EOF > %buildroot%{_menudir}/%{name}
-?package(hugin):command="/usr/bin/hugin" \
-icon="hugin.png" needs="X11" \
-section="Multimedia/Graphics" startup_notify="false" \
-title="Hugin" longtitle="A panorama tools GUI " \
-mimetypes="" accept_url="false" \
-multiple_files="false" \
-xdg="true"
-EOF
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
@@ -110,7 +100,6 @@ rm -rf %buildroot
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_menudir}/%{name}
 %{_mandir}/man?/*
 %{_datadir}/applications/hugin.desktop
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
