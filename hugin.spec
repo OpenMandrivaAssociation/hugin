@@ -1,6 +1,6 @@
 %define name 	 hugin
 %define version  0.6.1
-%define release  %mkrel 3
+%define release  %mkrel 4
 %define summary  Hugin - Panorama Tools GUI
 
 
