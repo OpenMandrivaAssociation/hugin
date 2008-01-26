@@ -1,22 +1,25 @@
 %define name 	 hugin
-%define version  0.6.1
-%define release  %mkrel 4
-%define summary  Hugin - Panorama Tools GUI
+%define version  0.7
+%define beta     beta4
+%define release  %mkrel 0.%{beta}.1
 
 
 Name: 		%{name}
 Version: 	%{version}
 Release: 	%{release}
-Summary:        %{summary}
-Source0: 	%{name}-%version.tar.bz2
+Summary:    Panorama Tools GUI
+License: 	GPL
+Group: 		Graphics
+Url: 		http://hugin.sourceforge.net
+Source0: 	http://downloads.sourceforge.net/hugin/%{name}-%{version}_%{beta}.tar.bz2
 Patch0:		hugin-0.5-defconfig.patch.bz2
 Source11: 	%{name}.16.png
 Source12: 	%{name}.32.png
 Source13: 	%{name}.48.png
-License: 	GPL
-Group: 		Graphics
-Url: 		http://hugin.sourceforge.net
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires:	pano12
+Requires:       enblend
+Requires(post): desktop-file-utils
+Requires(postun): desktop-file-utils
 BuildRequires: 	libboost-devel
 BuildRequires: 	pano12-devel >= 2.8.1
 BuildRequires: 	fftw2-devel
@@ -27,13 +30,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires: 	libpng-devel
 BuildRequires:	zip
 BuildRequires: desktop-file-utils
-
-Requires:	pano12
-Requires:       enblend
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
-
-
+BuildRoot: 	%{_tmppath}/%{name}-%{version}
 
 %description
 Hugin can be used to stitch multiple images together. The resulting image can
@@ -41,8 +38,8 @@ span 360 degrees. Another common use is the creation of very high resolution
 pictures by combining multiple images. 
 
 %prep 
-%setup -q -n %{name}-%version
-%patch0 
+%setup -q -n %{name}-%{version}_%{beta}
+#%patch0 
 
 %build
 touch m4/Makefile.in
@@ -76,10 +73,10 @@ install -m644 %{SOURCE13} -D %buildroot%{_liconsdir}/%{name}.png
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
-  --add-category="X-MandrivaLinux-Multimedia-Graphics;X-MandrivaLinux-CrossDesktop;" \
+  --add-category="X-MandrivaLinux-CrossDesktop;" \
   --add-category="Photography" \
   --add-category="Graphics" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 %clean 
 rm -rf %buildroot
