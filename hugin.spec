@@ -22,6 +22,7 @@ Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires: 	libboost-devel
 BuildRequires: 	pano12-devel >= 2.8.1
+BuildRequires: 	pano13-devel >= 2.8.1
 BuildRequires: 	fftw2-devel
 BuildRequires: 	libwxgtku-devel > 2.5
 BuildRequires:	zlib-devel 
@@ -44,13 +45,15 @@ pictures by combining multiple images.
 %build
 touch m4/Makefile.in
 
-#ln -s %{_libdir}/wx/config/multiarch-%_arch-linux/gtk2-ansi-release-2.6 ./wx-config
-
 # work-around broken wxGTK2.6 package
 ln -s %{_bindir}/wxrc-2.6-unicode ./wxrc
 export PATH=`pwd`:$PATH
 
-%configure2_5x --disable-rpath --disable-static --with-wx-config=wx-config-unicode --with-unicode=yes
+%configure2_5x \
+    --disable-rpath \
+    --disable-static \
+    --with-wx-config=wx-config-unicode \
+    --with-unicode=yes
 
 %make
 
@@ -69,14 +72,14 @@ install -m644 %{SOURCE11} -D %buildroot%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %buildroot%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %buildroot%{_liconsdir}/%{name}.png
 
-# menu entries
-
+# menu entry
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="X-MandrivaLinux-CrossDesktop;" \
   --add-category="Photography" \
   --add-category="Graphics" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
+  --dir %{buildroot}%{_datadir}/applications \
+  %{buildroot}%{_datadir}/applications/*
 
 %clean 
 rm -rf %buildroot
