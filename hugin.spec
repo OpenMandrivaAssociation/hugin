@@ -1,37 +1,34 @@
-%define name 	 hugin
-%define version  0.7
-%define beta     beta4
-%define release  %mkrel 0.%{beta}.1
+%define beta beta4
 
-
-Name: 		%{name}
-Version: 	%{version}
-Release: 	%{release}
-Summary:    Panorama Tools GUI
-License: 	GPL
-Group: 		Graphics
-Url: 		http://hugin.sourceforge.net
-Source0: 	http://downloads.sourceforge.net/hugin/%{name}-%{version}_%{beta}.tar.bz2
-Patch0:		hugin-0.5-defconfig.patch.bz2
-Source11: 	%{name}.16.png
-Source12: 	%{name}.32.png
-Source13: 	%{name}.48.png
+Summary:	Panorama Tools GUI
+Name: 		hugin
+Version:	0.7
+Release:	%mkrel 0.%{beta}.2
+License:	GPL
+Group:		Graphics
+URL:		http://hugin.sourceforge.net
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_%{beta}.tar.bz2
+Patch0:		hugin-gcc43.diff
+Patch1:		hugin-linkage_fix.diff
+Source11:	%{name}.16.png
+Source12:	%{name}.32.png
+Source13:	%{name}.48.png
 Requires:	pano12
-Requires:       enblend
+Requires:	enblend
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
-BuildRequires: 	libboost-devel
-BuildRequires: 	pano12-devel >= 2.8.1
-BuildRequires: 	pano13-devel >= 2.8.1
-BuildRequires: 	fftw2-devel
-BuildRequires: 	libwxgtku-devel > 2.5
+BuildRequires:	libboost-devel
+BuildRequires:	pano12-devel >= 2.8.1
+BuildRequires:	pano13-devel >= 2.8.1
+BuildRequires:	fftw2-devel
+BuildRequires:	libwxgtku-devel > 2.5
 BuildRequires:	zlib-devel 
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
-BuildRequires: 	libpng-devel
+BuildRequires:	libpng-devel
 BuildRequires:	zip
-BuildRequires: desktop-file-utils
-BuildRoot: 	%{_tmppath}/%{name}-%{version}
+BuildRequires:	desktop-file-utils
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Hugin can be used to stitch multiple images together. The resulting image can
@@ -39,15 +36,18 @@ span 360 degrees. Another common use is the creation of very high resolution
 pictures by combining multiple images. 
 
 %prep 
+
 %setup -q -n %{name}-%{version}_%{beta}
-#%patch0 
+%patch0 -p1
 
 %build
 touch m4/Makefile.in
 
 # work-around broken wxGTK2.6 package
-ln -s %{_bindir}/wxrc-2.6-unicode ./wxrc
-export PATH=`pwd`:$PATH
+#ln -s %{_bindir}/wxrc-2.6-unicode ./wxrc
+#export PATH=`pwd`:$PATH
+export CFLAGS="%{optflags} -fpermissive"
+export CXXFLAGS="%{optflags} -fpermissive"
 
 %configure2_5x \
     --disable-rpath \
@@ -81,20 +81,16 @@ desktop-file-install --vendor="" \
   --dir %{buildroot}%{_datadir}/applications \
   %{buildroot}%{_datadir}/applications/*
 
+%post
+%update_menus
+%update_desktop_database
+
+%postun 
+%clean_menus
+%clean_desktop_database
+
 %clean 
 rm -rf %buildroot
-
-%if %mdkversion < 200900
-%post
-%{update_menus} 
-%{update_desktop_database}
-%endif
-
-%if %mdkversion < 200900
-%postun 
-%{clean_menus} 
-%{clean_desktop_database}
-%endif
 
 %files -f %name.lang
 %defattr(-,root,root)
@@ -109,4 +105,3 @@ rm -rf %buildroot
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
 %{_datadir}/pixmaps/hugin.png
-
