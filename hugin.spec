@@ -1,4 +1,4 @@
-%define beta rc5
+%define beta rc6
 
 Summary:	Panorama Tools GUI
 Name: 		hugin
