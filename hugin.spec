@@ -1,30 +1,28 @@
-%define beta rc6
-
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	0.7.0
-Release:	%mkrel 0.%{beta}.1
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
-Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_%{beta}.tar.bz2
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Patch0:		hugin-link.diff
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Requires:	pano12
-Requires:	enblend
+Requires:	libpano13 >= 2.9.12
+Requires:	enblend >= 3.1
 Requires:	perl-Image-ExifTool
+Requires:	make
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires:  cmake
 BuildRequires:  OpenEXR-devel
 BuildRequires:  libexiv-devel
 BuildRequires:  libboost-devel
-BuildRequires:  pano12-devel >= 2.8.1
 BuildRequires:  pano13-devel >= 2.8.1
 BuildRequires:  fftw2-devel
-BuildRequires:  libwxgtku-devel > 2.5
+BuildRequires:  libwxgtku-devel > 2.6
 BuildRequires:  zlib-devel 
 BuildRequires:  libtiff-devel
 BuildRequires:  libjpeg-devel
@@ -55,6 +53,12 @@ cd build
 cat nona_gui.lang >> %name.lang
 
 perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
+
+# unused symlinks, prevents devel dependancies
+rm %{buildroot}/%{_libdir}/libhuginbase.so
+rm %{buildroot}/%{_libdir}/libhuginANN.so
+rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
+rm %{buildroot}/%{_libdir}/libhuginjhead.so
 
 # Menu icons
 install -m644 %{SOURCE11} -D %buildroot%{_miconsdir}/%{name}.png
