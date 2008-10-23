@@ -1,7 +1,7 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	0.7.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
@@ -10,7 +10,7 @@ Patch0:		hugin-link.diff
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Requires:	libpano13 >= 2.9.12
+Requires:	libpano13-tools >= 2.9.12
 Requires:	enblend >= 3.1
 Requires:	perl-Image-ExifTool
 Requires:	make
