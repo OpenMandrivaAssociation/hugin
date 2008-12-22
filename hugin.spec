@@ -1,7 +1,7 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	0.7.0
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
@@ -46,11 +46,8 @@ pictures by combining multiple images.
 
 %install
 rm -rf %buildroot
-cd build
-%makeinstall_std
-%find_lang %name
-%find_lang nona_gui
-cat nona_gui.lang >> %name.lang
+%makeinstall_std -C build
+%find_lang %name %name nona_gui
 
 perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
 
@@ -74,6 +71,7 @@ desktop-file-install --vendor="" \
   --dir %{buildroot}%{_datadir}/applications \
   %{buildroot}%{_datadir}/applications/*
 
+%if %mdkversion > 200900
 %post
 %update_menus
 %update_desktop_database
@@ -81,11 +79,12 @@ desktop-file-install --vendor="" \
 %postun 
 %clean_menus
 %clean_desktop_database
+%endif
 
 %clean 
 rm -rf %buildroot
 
-%files -f build/%name.lang
+%files -f %name.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING INSTALL_cmake LICENCE README README_JP TODO LICENCE_JHEAD LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual doc/batch-processing/README.batch doc/batch-processing/*.mk
 %{_bindir}/*
