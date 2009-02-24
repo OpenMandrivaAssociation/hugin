@@ -1,16 +1,16 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
-Version:	0.7.0
-Release:	%mkrel 4
+Version:	0.8.0
+Release:	%mkrel 0.beta1.1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
-Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_beta1.tar.gz
 Patch0:		hugin-link.diff
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Requires:	libpano13-tools >= 2.9.12
+Requires:	libpano13-tools >= 2.9.14
 Requires:	enblend >= 3.1
 Requires:	perl-Image-ExifTool
 Requires:	make
@@ -20,7 +20,7 @@ BuildRequires:  cmake
 BuildRequires:  OpenEXR-devel
 BuildRequires:  libexiv-devel
 BuildRequires:  libboost-devel
-BuildRequires:  pano13-devel >= 2.8.1
+BuildRequires:  pano13-devel >= 2.9.14
 BuildRequires:  fftw2-devel
 BuildRequires:  libwxgtku-devel > 2.6
 BuildRequires:  zlib-devel 
@@ -40,6 +40,7 @@ pictures by combining multiple images.
 %setup -q -n %{name}-%{version}
 %patch0 -p1 -b .link
 
+%define Werror_cflags %nil
 %build
 %cmake
 %make
@@ -56,6 +57,7 @@ rm %{buildroot}/%{_libdir}/libhuginbase.so
 rm %{buildroot}/%{_libdir}/libhuginANN.so
 rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
 rm %{buildroot}/%{_libdir}/libhuginjhead.so
+rm %{buildroot}/%{_libdir}/libceleste.so
 
 # Menu icons
 install -m644 %{SOURCE11} -D %buildroot%{_miconsdir}/%{name}.png
@@ -86,15 +88,17 @@ rm -rf %buildroot
 
 %files -f %name.lang
 %defattr(-,root,root)
-%doc AUTHORS COPYING INSTALL_cmake LICENCE README README_JP TODO LICENCE_JHEAD LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual doc/batch-processing/README.batch doc/batch-processing/*.mk
+%doc AUTHORS COPYING INSTALL_cmake LICENCE README README_JP TODO LICENCE_JHEAD LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual doc/batch-processing/README.batch
 %{_bindir}/*
 %{_libdir}/libhugin*
+%{_libdir}/libceleste*
 %{_datadir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_mandir}/man?/*
 %{_datadir}/applications/hugin.desktop
+%{_datadir}/applications/PTBatcher*.desktop
 %{_datadir}/applications/hugin_stitch_project.desktop
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
