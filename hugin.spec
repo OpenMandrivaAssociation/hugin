@@ -27,6 +27,7 @@ BuildRequires:  zlib-devel
 BuildRequires:  libtiff-devel
 BuildRequires:  libjpeg-devel
 BuildRequires:  libpng-devel
+BuildRequires:	libglew-devel
 BuildRequires:  zip
 BuildRequires:  desktop-file-utils
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
