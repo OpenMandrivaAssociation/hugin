@@ -1,11 +1,11 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	0.8.0
-Release:	%mkrel 0.beta1.1
+Release:	%mkrel 0.beta2.1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
-Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_beta1.tar.gz
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_beta2.tar.gz
 Patch0:		hugin-link.diff
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
