@@ -1,12 +1,12 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	0.8.0
-Release:	%mkrel 0.beta2.1
+Release:	%mkrel 0.rc4.1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
-Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_beta2.tar.gz
-Patch0:		hugin-link.diff
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_rc4.tar.gz
+Patch0:		hugin-0.8.0-fix-linking.patch
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
@@ -57,7 +57,6 @@ perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
 rm %{buildroot}/%{_libdir}/libhuginbase.so
 rm %{buildroot}/%{_libdir}/libhuginANN.so
 rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
-rm %{buildroot}/%{_libdir}/libhuginjhead.so
 rm %{buildroot}/%{_libdir}/libceleste.so
 
 # Menu icons
@@ -100,7 +99,6 @@ rm -rf %buildroot
 %{_mandir}/man?/*
 %{_datadir}/applications/hugin.desktop
 %{_datadir}/applications/PTBatcher*.desktop
-%{_datadir}/applications/hugin_stitch_project.desktop
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
 %{_datadir}/pixmaps/hugin.png
