@@ -1,12 +1,11 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
-Version:	0.8.0
-Release:	%mkrel 3
+Version:	2009.2.0
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.gz
-Patch0:		hugin-0.8.0-fix-linking.patch
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
@@ -22,12 +21,13 @@ BuildRequires:  libexiv-devel
 BuildRequires:  libboost-devel
 BuildRequires:  pano13-devel >= 2.9.14
 BuildRequires:  fftw2-devel
-BuildRequires:  libwxgtku-devel > 2.6
+BuildRequires:  libwxgtku-devel > 2.7
 BuildRequires:  zlib-devel 
 BuildRequires:  libtiff-devel
 BuildRequires:  libjpeg-devel
 BuildRequires:  libpng-devel
 BuildRequires:	libglew-devel
+BuildRequires:	mesaglut-devel
 BuildRequires:  zip
 BuildRequires:  desktop-file-utils
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -39,7 +39,6 @@ pictures by combining multiple images.
 
 %prep 
 %setup -q -n %{name}-%{version}
-%patch0 -p1 -b .link
 
 %define Werror_cflags %nil
 %build
@@ -88,7 +87,7 @@ rm -rf %buildroot
 
 %files -f %name.lang
 %defattr(-,root,root)
-%doc AUTHORS COPYING INSTALL_cmake LICENCE README README_JP TODO LICENCE_JHEAD LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual doc/batch-processing/README.batch
+%doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual doc/batch-processing/README.batch
 %{_bindir}/*
 %{_libdir}/libhugin*
 %{_libdir}/libceleste*
