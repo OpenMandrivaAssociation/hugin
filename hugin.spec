@@ -1,7 +1,7 @@
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	2009.2.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
