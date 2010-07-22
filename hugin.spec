@@ -1,16 +1,18 @@
+%define beta beta1
+
 Summary:	Panorama Tools GUI
 Name: 		hugin
-Version:	2009.4.0
-Release:	%mkrel 2
+Version:	2010.2.0
+Release:	%mkrel 0.%{beta}.1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
-Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}_%{beta}.tar.gz
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Requires:	libpano13-tools >= 2.9.14
-Requires:	enblend >= 3.1
+Requires:	libpano13-tools >= 2.9.17
+Requires:	enblend >= 3.2
 Requires:	perl-Image-ExifTool
 Requires:	make
 Requires(post): desktop-file-utils
@@ -19,7 +21,7 @@ BuildRequires:  cmake
 BuildRequires:  OpenEXR-devel
 BuildRequires:  libexiv-devel
 BuildRequires:  libboost-devel
-BuildRequires:  pano13-devel >= 2.9.14
+BuildRequires:  pano13-devel >= 2.9.17
 BuildRequires:  fftw2-devel
 BuildRequires:  libwxgtku-devel > 2.7
 BuildRequires:  zlib-devel 
@@ -87,7 +89,7 @@ rm -rf %buildroot
 
 %files -f %name.lang
 %defattr(-,root,root)
-%doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual doc/batch-processing/README.batch
+%doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
 %{_libdir}/libhugin*
 %{_libdir}/libceleste*
