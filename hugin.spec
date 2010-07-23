@@ -56,6 +56,7 @@ perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
 
 # unused symlinks, prevents devel dependancies
 rm %{buildroot}/%{_libdir}/libhuginbase.so
+rm %{buildroot}/%{_libdir}/libhuginbasewx.so
 rm %{buildroot}/%{_libdir}/libhuginANN.so
 rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
 rm %{buildroot}/%{_libdir}/libceleste.so
