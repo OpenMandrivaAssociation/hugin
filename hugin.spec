@@ -1,9 +1,9 @@
-%define beta beta1
+%define beta rc1
 
 Summary:	Panorama Tools GUI
 Name: 		hugin
 Version:	2010.2.0
-Release:	%mkrel 0.%{beta}.5
+Release:	%mkrel 0.%{beta}.1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
