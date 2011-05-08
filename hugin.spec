@@ -1,35 +1,36 @@
 Summary:	Panorama Tools GUI
-Name: 		hugin
-Version:	2010.2.0
-Release:	%mkrel 3
+Name:		hugin
+Version:	2010.4.0
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
-Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
+Patch0:		hugin-2010.4.0-add-missing-header.patch
 Requires:	libpano13-tools >= 2.9.17
 Requires:	enblend >= 3.2
 Requires:	perl-Image-ExifTool
 Requires:	make
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
-BuildRequires:  cmake
-BuildRequires:  OpenEXR-devel
-BuildRequires:  libexiv-devel
-BuildRequires:  libboost-devel
-BuildRequires:  pano13-devel >= 2.9.17
-BuildRequires:  fftw2-devel
-BuildRequires:  libwxgtku-devel > 2.7
-BuildRequires:  zlib-devel 
-BuildRequires:  libtiff-devel
-BuildRequires:  libjpeg-devel
-BuildRequires:  libpng-devel
+Requires(post):	desktop-file-utils
+Requires(postun):	desktop-file-utils
+BuildRequires:	cmake
+BuildRequires:	OpenEXR-devel
+BuildRequires:	libexiv-devel
+BuildRequires:	libboost-devel
+BuildRequires:	pano13-devel >= 2.9.17
+BuildRequires:	fftw2-devel
+BuildRequires:	libwxgtku-devel > 2.7
+BuildRequires:	zlib-devel
+BuildRequires:	libtiff-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
 BuildRequires:	libglew-devel
 BuildRequires:	mesaglut-devel
-BuildRequires:  zip
-BuildRequires:  desktop-file-utils
+BuildRequires:	zip
+BuildRequires:	desktop-file-utils
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -37,11 +38,13 @@ Hugin can be used to stitch multiple images together. The resulting image can
 span 360 degrees. Another common use is the creation of very high resolution
 pictures by combining multiple images. 
 
-%prep 
+%prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
-%define Werror_cflags %nil
 %build
+%define Werror_cflags %nil
+
 %cmake
 %make
 
