@@ -53,14 +53,14 @@ rm -rf %buildroot
 %makeinstall_std -C build
 %find_lang %name %name nona_gui
 
-perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
+#perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
 
 # unused symlinks, prevents devel dependancies
-rm %{buildroot}/%{_libdir}/libhuginbase.so
-rm %{buildroot}/%{_libdir}/libhuginbasewx.so
-rm %{buildroot}/%{_libdir}/libhuginANN.so
-rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
-rm %{buildroot}/%{_libdir}/libceleste.so
+#rm %{buildroot}/%{_libdir}/libhuginbase.so
+#rm %{buildroot}/%{_libdir}/libhuginbasewx.so
+#rm %{buildroot}/%{_libdir}/libhuginANN.so
+#rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
+#rm %{buildroot}/%{_libdir}/libceleste.so
 
 # Menu icons
 install -m644 %{SOURCE11} -D %buildroot%{_miconsdir}/%{name}.png
@@ -93,8 +93,8 @@ rm -rf %buildroot
 %defattr(-,root,root)
 %doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
-%{_libdir}/libhugin*
-%{_libdir}/libceleste*
+#%{_libdir}/libhugin*
+#%{_libdir}/libceleste*
 %{_datadir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
