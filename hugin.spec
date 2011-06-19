@@ -91,8 +91,7 @@ rm -rf %buildroot
 %defattr(-,root,root)
 %doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
-#%{_libdir}/libhugin*
-#%{_libdir}/libceleste*
+%{_libdir}/%{name}/lib*.so.*
 %{_datadir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
@@ -103,3 +102,4 @@ rm -rf %buildroot
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
 %{_datadir}/pixmaps/hugin.png
+%{_datadir}/pixmaps/ptbatcher.png
