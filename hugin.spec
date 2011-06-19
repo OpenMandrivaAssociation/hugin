@@ -9,7 +9,6 @@ Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Patch0:		hugin-2010.4.0-add-missing-header.patch
 Requires:	libpano13-tools >= 2.9.17
 Requires:	enblend >= 3.2
 Requires:	perl-Image-ExifTool
@@ -40,7 +39,6 @@ pictures by combining multiple images.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p1
 
 %build
 %define Werror_cflags %nil
