@@ -1,7 +1,7 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2011.0.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
@@ -9,7 +9,7 @@ Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Requires:	libpano13-tools >= 2.9.17
+Requires:	libpano13-tools >= 2.9.18
 Requires:	enblend >= 3.2
 Requires:	perl-Image-ExifTool
 Requires:	make
@@ -19,7 +19,7 @@ BuildRequires:	cmake
 BuildRequires:	OpenEXR-devel
 BuildRequires:	libexiv-devel
 BuildRequires:	libboost-devel
-BuildRequires:	pano13-devel >= 2.9.17
+BuildRequires:	pano13-devel >= 2.9.18
 BuildRequires:	fftw2-devel
 BuildRequires:	libwxgtku-devel > 2.7
 BuildRequires:	zlib-devel
@@ -42,8 +42,7 @@ pictures by combining multiple images.
 
 %build
 %define Werror_cflags %nil
-
-%cmake
+%cmake -DCMAKE_SKIP_RPATH:BOOL=OFF
 %make
 
 %install
