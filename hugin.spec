@@ -28,9 +28,9 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libglew-devel
 BuildRequires:	mesaglut-devel
+BuildRequires:	libxmu-devel
 BuildRequires:	zip
 BuildRequires:	desktop-file-utils
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Hugin can be used to stitch multiple images together. The resulting image can
