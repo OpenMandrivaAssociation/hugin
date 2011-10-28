@@ -30,6 +30,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libglew-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	libxmu-devel
+BuildRequires:	tclap
 BuildRequires:	zip
 BuildRequires:	desktop-file-utils
 
