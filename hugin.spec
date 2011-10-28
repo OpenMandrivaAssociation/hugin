@@ -100,6 +100,7 @@ rm -rf %buildroot
 %{_mandir}/man?/*
 %{_datadir}/applications/hugin.desktop
 %{_datadir}/applications/PTBatcher*.desktop
+%{_datadir}/applications/calibrate_lens_gui.desktop
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
 %{_datadir}/pixmaps/hugin.png
