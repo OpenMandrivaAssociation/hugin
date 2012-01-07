@@ -17,22 +17,22 @@ Requires:	make
 Requires(post):	desktop-file-utils
 Requires(postun):	desktop-file-utils
 BuildRequires:	cmake
-BuildRequires:	OpenEXR-devel
-BuildRequires:	libexiv-devel
-BuildRequires:	libboost-devel
-BuildRequires:	pano13-devel >= 2.9.18
-BuildRequires:	fftw2-devel
-BuildRequires:	libwxgtku-devel > 2.7
-BuildRequires:	zlib-devel
-BuildRequires:	libtiff-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	libpng-devel
-BuildRequires:	libglew-devel
-BuildRequires:	mesaglut-devel
-BuildRequires:	libxmu-devel
+BuildRequires:	boost-devel
+BuildRequires:	desktop-file-utils
 BuildRequires:	tclap
 BuildRequires:	zip
-BuildRequires:	desktop-file-utils
+BuildRequires:	fftw2-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	wxgtku-devel > 2.7
+BuildRequires:	pkgconfig(exiv2)
+BuildRequires:	pkgconfig(glew)
+BuildRequires:	pkgconfig(glut)
+BuildRequires:	pkgconfig(libpano13) >= 2.9.18
+BuildRequires:	pkgconfig(libtiff-4)
+BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	pkgconfig(OpenEXR)
+BuildRequires:	pkgconfig(xmu)
+BuildRequires:	pkgconfig(zlib)
 
 %description
 Hugin can be used to stitch multiple images together. The resulting image can
@@ -76,21 +76,7 @@ desktop-file-install --vendor="" \
   --dir %{buildroot}%{_datadir}/applications \
   %{buildroot}%{_datadir}/applications/*
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%update_desktop_database
-
-%postun 
-%clean_menus
-%clean_desktop_database
-%endif
-
-%clean
-rm -rf %buildroot
-
 %files -f %name.lang
-%defattr(-,root,root)
 %doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
