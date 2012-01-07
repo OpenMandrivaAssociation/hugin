@@ -1,7 +1,7 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2011.2.0
-Release:	%mkrel 3
+Version:	2011.4.0
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
@@ -51,7 +51,7 @@ pictures by combining multiple images.
 %install
 rm -rf %buildroot
 %makeinstall_std -C build
-%find_lang %name %name nona_gui
+%find_lang %name nona_gui %{name}.lang
 
 #perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
 
