@@ -1,7 +1,7 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2011.4.0
-Release:	%mkrel 1
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://hugin.sourceforge.net
@@ -9,7 +9,7 @@ Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Patch0:		hugin-2011.2.0-l10n-ru.patch
+Patch0:		hugin-2011.4.0-l10n-ru.patch
 Requires:	libpano13-tools >= 2.9.18
 Requires:	enblend >= 3.2
 Requires:	perl-Image-ExifTool
@@ -23,7 +23,7 @@ BuildRequires:	tclap
 BuildRequires:	zip
 BuildRequires:	fftw2-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	wxgtku-devel > 2.7
+BuildRequires:	wxgtku-devel
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glut)
@@ -40,32 +40,23 @@ span 360 degrees. Another common use is the creation of very high resolution
 pictures by combining multiple images. 
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p1 -b .po-file
+# Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
+find . -type f -exec chmod 644 {} \;
 
 %build
-%define Werror_cflags %nil
+%define Werror_cflags %{nil}
 %cmake -DCMAKE_SKIP_RPATH:BOOL=OFF
 %make
 
 %install
-rm -rf %buildroot
 %makeinstall_std -C build
-%find_lang %name nona_gui %{name}.lang
-
-#perl -pi -e "s|\r\n|\n|" %buildroot%{_datadir}/%name/xrc/data/*.xpm
-
-# unused symlinks, prevents devel dependancies
-#rm %{buildroot}/%{_libdir}/libhuginbase.so
-#rm %{buildroot}/%{_libdir}/libhuginbasewx.so
-#rm %{buildroot}/%{_libdir}/libhuginANN.so
-#rm %{buildroot}/%{_libdir}/libhuginvigraimpex.so
-#rm %{buildroot}/%{_libdir}/libceleste.so
 
 # Menu icons
-install -m644 %{SOURCE11} -D %buildroot%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE12} -D %buildroot%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE13} -D %buildroot%{_liconsdir}/%{name}.png
+%__install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
+%__install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
+%__install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
 # menu entry
 desktop-file-install --vendor="" \
@@ -76,7 +67,15 @@ desktop-file-install --vendor="" \
   --dir %{buildroot}%{_datadir}/applications \
   %{buildroot}%{_datadir}/applications/*
 
-%files -f %name.lang
+%find_lang %{name} %{name} nona_gui
+
+%if %{mdvver} <= 201100
+%find_lang %{name} %{name} nona_gui
+%else
+%find_lang %{name} nona_gui %{name}.lang
+%endif
+
+%files -f %{name}.lang
 %doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
