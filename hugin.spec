@@ -23,12 +23,13 @@ BuildRequires:	tclap
 BuildRequires:	zip
 BuildRequires:	fftw2-devel
 BuildRequires:	jpeg-devel
+# pkgconfig(libtiff-4) is not provided by libtiff in 2011 so we use old format
+BuildRequires:	tiff-devel
 BuildRequires:	wxgtku-devel
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glut)
 BuildRequires:	pkgconfig(libpano13) >= 2.9.18
-BuildRequires:	pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(libpng15)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(xmu)
