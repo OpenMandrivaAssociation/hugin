@@ -1,5 +1,4 @@
 sources:
-  hugin-2011.4.0.tar.bz2: 21ec7331d5e196aca2a8771d3c9101dd181ad93b
   hugin-2012.0.0.tar.bz2: !!python/unicode '53f97d030716e66dc5a49c7e786686a9d5262b8d'
   hugin.16.png: !!python/unicode '3a9ea31281f82eb0060ac413658fca9499a8bedc'
   hugin.32.png: !!python/unicode 'bc384e888a97b33ef0588b3553756b91816afabc'

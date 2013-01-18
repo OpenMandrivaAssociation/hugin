@@ -9,8 +9,7 @@ Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Patch0:		hugin-2011.4.0-l10n-ru.patch
-Patch1:		hugin-2011.4.0-gcc4.7.patch
+Patch0:		hugin-2012.0.0-l10n-ru.patch
 Requires:	libpano13-tools >= 2.9.18
 Requires:	enblend >= 3.2
 Requires:	perl-Image-ExifTool
@@ -35,6 +34,8 @@ BuildRequires:	pkgconfig(libpng15)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:  swig >= 2.0
+BuildRequires:  pkgconfig(lensfun)
 
 %description
 Hugin can be used to stitch multiple images together. The resulting image can
@@ -43,8 +44,7 @@ pictures by combining multiple images.
 
 %prep
 %setup -q
-%patch0 -p1 -b .po-file
-%patch1 -p1 -b .gcc4.7
+#%patch0 -p1 -b .po-file
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
 
@@ -87,14 +87,12 @@ desktop-file-install --vendor="" \
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_mandir}/man?/*
-%{_datadir}/applications/hugin.desktop
-%{_datadir}/applications/PTBatcher*.desktop
-%{_datadir}/applications/calibrate_lens_gui.desktop
+%{_datadir}/applications/*.desktop
 %{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
 %{_datadir}/pixmaps/hugin.png
 %{_datadir}/pixmaps/ptbatcher.png
-
+%{py_platsitedir}/*
 
 %changelog
 * Tue Feb 07 2012 Andrey Bondrov <abondrov@mandriva.org> 2011.4.0-1
