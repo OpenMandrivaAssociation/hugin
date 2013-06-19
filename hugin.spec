@@ -24,7 +24,7 @@ BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glut)
 BuildRequires:	pkgconfig(lensfun)
 BuildRequires:	pkgconfig(libpano13) >= 2.9.18
-BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
