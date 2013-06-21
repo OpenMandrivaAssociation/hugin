@@ -1,12 +1,11 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2012.0.0
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
-Patch0:		hugin-2012.0.0-l10n-ru.patch
 
 BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
@@ -20,7 +19,9 @@ BuildRequires:	jpeg-devel
 BuildRequires:	tiff-devel
 BuildRequires:	wxgtku-devel
 BuildRequires:	pkgconfig(exiv2)
+BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glew)
+BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(glut)
 BuildRequires:	pkgconfig(lensfun)
 BuildRequires:	pkgconfig(libpano13) >= 2.9.18
@@ -31,8 +32,6 @@ BuildRequires:	pkgconfig(zlib)
 Requires:	enblend >= 3.2
 Requires:	libpano13-tools >= 2.9.18
 Requires:	perl-Image-ExifTool
-#Requires:	make
-Requires(post,postun):	desktop-file-utils
 
 %description
 Hugin can be used to stitch multiple images together. The resulting image can
@@ -41,7 +40,6 @@ pictures by combining multiple images.
 
 %prep
 %setup -q
-#%patch0 -p1 -b .po-file
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
 
@@ -62,13 +60,7 @@ desktop-file-install --vendor="" \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/*
 
-%find_lang %{name} %{name} nona_gui
-
-%if %{mdvver} <= 201100
-%find_lang %{name} %{name} nona_gui
-%else
 %find_lang %{name} nona_gui %{name}.lang
-%endif
 
 %files -f %{name}.lang
 %doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
