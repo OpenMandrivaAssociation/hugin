@@ -1,0 +1,9 @@
+--- doc/deghosting_mask.pod~	2012-08-10 14:50:22.000000000 +0800
++++ doc/deghosting_mask.pod	2013-06-05 16:52:42.158602318 +0800
+@@ -87,5 +87,5 @@
+ 
+ =head1 AUTHORS
+ 
+-Lukáš Jirkovský
++Lukas Jirkovsky
+ 
