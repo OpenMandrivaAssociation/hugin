@@ -1,11 +1,12 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2012.0.0
-Release:	6
+Version:	2013.0.0
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
+Patch0:		hugin-2012.0.0-invalid-utf8.patch
 
 BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
@@ -13,7 +14,7 @@ BuildRequires:	swig >= 2.0
 BuildRequires:	tclap
 BuildRequires:	zip
 BuildRequires:	boost-devel
-BuildRequires:	fftw2-devel
+#BuildRequires:	fftw2-devel
 BuildRequires:	jpeg-devel
 # pkgconfig(libtiff-4) is not provided by libtiff in 2011 so we use old format
 BuildRequires:	tiff-devel
@@ -29,6 +30,7 @@ BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(lapack)
 Requires:	enblend >= 3.2
 Requires:	libpano13-tools >= 2.9.18
 Requires:	perl-Image-ExifTool
@@ -40,12 +42,17 @@ pictures by combining multiple images.
 
 %prep
 %setup -q
+%patch0 -p0
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
 
+sed -i 's/Exec=hugin/Exec=hugin %%f/' src/hugin1/hugin/hugin.desktop
+
 %build
 %define Werror_cflags %{nil}
-%cmake -DCMAKE_SKIP_RPATH:BOOL=OFF
+%cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON
+find . -iname flags.make -exec sed -i 's/\-pthread;/\-pthread\ /' {} \;
+find . -iname link.txt -exec sed -i 's/\-pthread;/\-pthread\ /' {} \;
 %make
 
 %install
