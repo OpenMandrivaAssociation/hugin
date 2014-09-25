@@ -1,12 +1,14 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2013.0.0
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Patch0:		hugin-2012.0.0-invalid-utf8.patch
+Patch1:		hugin-2013.0-clang.patch
+Patch2:		hugin-2013.0-boost1.56.patch
 
 BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
@@ -43,6 +45,9 @@ pictures by combining multiple images.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p1
+%patch2 -p1
+
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
 
