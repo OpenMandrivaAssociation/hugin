@@ -77,6 +77,7 @@ desktop-file-install --vendor="" \
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
 %{_datadir}/%{name}
+%{_datadir}/appdata/*
 %{_datadir}/applications/*.desktop
 %{_iconsdir}/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
