@@ -1,14 +1,12 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2014.0.0
-Release:	10
+Version:	2015.0.0
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Patch0:		hugin-2012.0.0-invalid-utf8.patch
-Patch1:		hugin-2013.0.0-lensfun_0.3.patch
-Patch2:		hugin-2013.0-boost1.56.patch
 
 BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
