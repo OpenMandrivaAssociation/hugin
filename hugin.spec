@@ -20,6 +20,7 @@ BuildRequires:	boost-devel
 BuildRequires:	jpeg-devel
 # pkgconfig(libtiff-4) is not provided by libtiff in 2011 so we use old format
 BuildRequires:	tiff-devel
+BuildRequires:  vigra-devel
 BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(gl)
