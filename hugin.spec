@@ -16,7 +16,7 @@ BuildRequires:	swig >= 2.0
 BuildRequires:	tclap
 BuildRequires:	zip
 BuildRequires:	boost-devel
-#BuildRequires:	fftw2-devel
+BuildRequires:	fftw-devel
 BuildRequires:	jpeg-devel
 # pkgconfig(libtiff-4) is not provided by libtiff in 2011 so we use old format
 BuildRequires:	tiff-devel
