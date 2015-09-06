@@ -1,3 +1,5 @@
+%define _disable_ld_no_undefined 1
+
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2015.0.0
@@ -52,8 +54,6 @@ find . -type f -exec chmod 644 {} \;
 %build
 %define Werror_cflags %{nil}
 %cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON
-find . -iname flags.make -exec sed -i 's/\-pthread;/\-pthread\ /' {} \;
-find . -iname link.txt -exec sed -i 's/\-pthread;/\-pthread\ /' {} \;
 %make
 
 %install
@@ -71,7 +71,7 @@ desktop-file-install --vendor="" \
 %find_lang %{name} nona_gui %{name}.lang
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING INSTALL_cmake README README_JP TODO LICENCE_VIGRA doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
+%doc AUTHORS COPYING INSTALL_cmake README README_JP TODO doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
 %{_datadir}/%{name}
