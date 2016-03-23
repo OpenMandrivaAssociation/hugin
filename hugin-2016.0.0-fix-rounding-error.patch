@@ -1,0 +1,218 @@
+--- hugin-2016.0.0/src/hugin_base/vigra_ext/StitchWatershed.h.omv~	2016-03-23 11:53:56.979916896 +0100
++++ hugin-2016.0.0/src/hugin_base/vigra_ext/StitchWatershed.h	2016-03-23 11:54:51.419565628 +0100
+@@ -30,6 +30,7 @@
+ #ifdef HAVE_OPENMP
+ #include <omp.h>
+ #endif
++#include <cmath>
+ #include "openmp_vigra.h"
+ 
+ namespace vigra_ext
+@@ -57,7 +58,7 @@ namespace vigra_ext
+             template <class PixelType>
+             double operator()(PixelType const& v1, PixelType const& v2) const
+             {
+-                return abs(static_cast<double>(v1 - v2));
++                return std::abs(static_cast<double>(v1 - v2));
+             };
+             template <class PixelType>
+             double operator()(vigra::RGBValue<PixelType> const& v1, vigra::RGBValue<PixelType> const& v2) const
+--- hugin-2016.0.0/src/hugin_base/lines/FindLines.cpp.omv~	2016-03-23 12:03:46.466221778 +0100
++++ hugin-2016.0.0/src/hugin_base/lines/FindLines.cpp	2016-03-23 12:04:56.805791755 +0100
+@@ -26,6 +26,7 @@
+ #include "vigra/edgedetection.hxx"
+ #include "FindLines.h"
+ #include "FindN8Lines.h"
++#include <cmath>
+ #include <algorithms/nona/FitPanorama.h>
+ #include <algorithms/basic/CalculateOptimalROI.h>
+ #include <nona/RemappedPanoImage.h>
+@@ -188,7 +189,7 @@ VerticalLine FitLine(SingleLine line)
+         s_xy+=(double)line.line[i].x*line.line[i].y/n;
+         s_x2+=(double)line.line[i].x*line.line[i].x/n;
+     };
+-    if(abs(s_x2-s_x*s_x)<0.00001)
++    if(std::abs(s_x2-s_x*s_x)<0.00001)
+     {
+         //vertical line needs special treatment
+         vl.start.x=s_x;
+@@ -226,7 +227,7 @@ VerticalLineVector FilterLines(Lines lin
+                 vigra::Diff2D diff=vl.end-vl.start;
+                 if(diff.magnitude()>20)
+                 {
+-                    if(abs((diff.x*cos(DEG_TO_RAD(roll))+diff.y*sin(DEG_TO_RAD(roll)))/diff.magnitude())<0.1)
++                    if(std::abs((diff.x*cos(DEG_TO_RAD(roll))+diff.y*sin(DEG_TO_RAD(roll)))/diff.magnitude())<0.1)
+                     {
+                         vertLines.push_back(vl);
+                     };
+@@ -440,7 +441,7 @@ HuginBase::CPVector _getVerticalLines(co
+             if(detectedLines.size()==1)
+             {
+                 vigra::Diff2D diff((double)detectedLines[0].x2-detectedLines[0].x1,(double)detectedLines[0].y2-detectedLines[0].y1);
+-                if(abs((diff.x*cos(DEG_TO_RAD(roll))+diff.y*sin(DEG_TO_RAD(roll)))/diff.magnitude())<0.05)
++                if(std::abs((diff.x*cos(DEG_TO_RAD(roll))+diff.y*sin(DEG_TO_RAD(roll)))/diff.magnitude())<0.05)
+                 {
+                     HuginBase::ControlPoint cp=detectedLines[0];
+                     cp.image1Nr=imgNr;
+--- hugin-2016.0.0/src/hugin1/hugin/CPEditorPanel.cpp.omv~	2016-03-23 12:35:11.694900438 +0100
++++ hugin-2016.0.0/src/hugin1/hugin/CPEditorPanel.cpp	2016-03-23 12:36:14.574525143 +0100
+@@ -53,6 +53,7 @@
+ #include <algorithm>
+ #include <float.h>
+ #include <vector>
++#include <cmath>
+ 
+ // more vigra include if needed
+ #include "vigra/cornerdetection.hxx"
+@@ -382,7 +383,7 @@ void CPEditorPanel::OnCPEvent( CPEvent&
+             HuginBase::ControlPoint cp = ev.getControlPoint();
+             cp.image1Nr=m_leftImageNr;
+             cp.image2Nr=m_rightImageNr;
+-            bool  hor = abs(cp.x1 - cp.x2) > (abs(cp.y1 - cp.y2) * vertBias);
++            bool  hor = std::abs(cp.x1 - cp.x2) > (std::abs(cp.y1 - cp.y2) * vertBias);
+             switch (m_leftRot)
+             {
+                 case CPImageCtrl::ROT0:
+@@ -511,7 +512,7 @@ void CPEditorPanel::CreateNewPoint()
+             // Most projections will have a bias to creating vertical
+             // constraints.
+             float vertBias = getVerticalCPBias();
+-            bool  hor = abs(p1.x - p2.x) > (abs(p1.y - p2.y) * vertBias);
++            bool  hor = std::abs(p1.x - p2.x) > (std::abs(p1.y - p2.y) * vertBias);
+             switch (m_leftRot) {
+                 case CPImageCtrl::ROT0:
+                 case CPImageCtrl::ROT180:
+--- hugin-2016.0.0/src/hugin1/hugin/CPImageCtrl.cpp.omv~	2016-03-23 12:34:18.215219654 +0100
++++ hugin-2016.0.0/src/hugin1/hugin/CPImageCtrl.cpp	2016-03-23 12:35:05.714936133 +0100
+@@ -40,6 +40,7 @@
+ #else
+ #include <boost/bind.hpp>
+ #endif
++#include <cmath>
+ 
+ #include "hugin/config_defaults.h"
+ #include "hugin/CPImageCtrl.h"
+@@ -217,7 +218,7 @@ void DisplayedControlPoint::Draw(wxDC& d
+     if(m_line)
+     {
+         box.setUpperLeft(vigra::Point2D(hugin_utils::roundi(std::min(m_cp.x1, m_cp.x2)) - l, hugin_utils::roundi(std::min(m_cp.y1, m_cp.y2)) - l));
+-        box.setSize(hugin_utils::roundi(abs(m_cp.x1 - m_cp.x2) + 2.0*l), hugin_utils::roundi(abs(m_cp.y1 - m_cp.y2) + 2.0*l));
++        box.setSize(hugin_utils::roundi(std::abs(m_cp.x1 - m_cp.x2) + 2.0*l), hugin_utils::roundi(std::abs(m_cp.y1 - m_cp.y2) + 2.0*l));
+     }
+     else
+     {
+--- hugin-2016.0.0/src/hugin1/hugin/DragTool.cpp.omv~	2016-03-23 12:36:46.624333865 +0100
++++ hugin-2016.0.0/src/hugin1/hugin/DragTool.cpp	2016-03-23 12:37:00.214252759 +0100
+@@ -29,7 +29,7 @@
+ #include "base_wx/PanoCommand.h"
+ #include "algorithms/optimizer/ImageGraph.h"
+ 
+-#include <math.h>
++#include <cmath>
+ #include <wx/platform.h>
+ #ifdef __WXMAC__
+ #include <OpenGL/gl.h>
+@@ -99,8 +99,8 @@ void DragTool::MouseMoveEvent(double x,
+             shift = e.m_shiftDown;
+             if (shift)
+             {
+-                if (abs(shift_coordinates.x - start_coordinates.x)
+-                    < abs(shift_coordinates.y - start_coordinates.y))
++                if (std::abs(shift_coordinates.x - start_coordinates.x)
++                    < std::abs(shift_coordinates.y - start_coordinates.y))
+                 {
+                     shift_coordinates.x = start_coordinates.x;
+                     helper->SetStatusMessage(_("Currently constrained to moving only pitch. Make a larger movement in the opposite direction to constrain to yaw."));
+--- hugin-2016.0.0/src/hugin1/hugin/GreatCircles.cpp.omv~	2016-03-23 12:37:12.434179831 +0100
++++ hugin-2016.0.0/src/hugin1/hugin/GreatCircles.cpp	2016-03-23 12:37:22.834117766 +0100
+@@ -271,7 +271,7 @@ void GreatCircleArc::LineSegment::doGL(d
+     //first find out if it is a special case
+ 
+     bool vertical = false;
+-    if (abs(vertices[1].x - vertices[0].x) < 0.00001) {
++    if (std::abs(vertices[1].x - vertices[0].x) < 0.00001) {
+         xd = d;
+         if (vertices[1].y > vertices[0].y) {
+             xd *= -1; 
+@@ -281,7 +281,7 @@ void GreatCircleArc::LineSegment::doGL(d
+     }
+ 
+     bool horizontal = false;
+-    if(abs(vertices[1].y - vertices[0].y) < 0.00001) {
++    if(std::abs(vertices[1].y - vertices[0].y) < 0.00001) {
+         xd = 0;
+         yd = d;
+         if (vertices[1].x > vertices[0].x) {
+--- hugin-2016.0.0/src/hugin1/hugin/OverviewOutlinesTool.cpp.omv~	2016-03-23 12:36:24.664464924 +0100
++++ hugin-2016.0.0/src/hugin1/hugin/OverviewOutlinesTool.cpp	2016-03-23 12:36:38.234383939 +0100
+@@ -36,6 +36,7 @@
+ 
+ #include "GreatCircles.h"
+ #include <cfloat>
++#include <cmath>
+ 
+ const double OverviewOutlinesTool::res=10;
+ const double OverviewOutlinesTool::mindist=2;
+@@ -455,7 +456,7 @@ void OverviewOutlinesTool::DrawRect(doub
+                 if (
+                         (edge1 > ressq || edge3 > ressq) 
+                             && 
+-                        abs(top_rec.top - top_rec.bottom) > tmindist
++                        std::abs(top_rec.top - top_rec.bottom) > tmindist
+                     ) {
+ 
+                         divide_ver = true;
+@@ -463,7 +464,7 @@ void OverviewOutlinesTool::DrawRect(doub
+                 } else if (
+                             (edge2 > ressq || edge4 > ressq) 
+                                 && 
+-                            abs(top_rec.left - top_rec.right) > tmindist
++                            std::abs(top_rec.left - top_rec.right) > tmindist
+                         ) {
+ 
+                         divide_hor = true;
+--- hugin-2016.0.0/src/hugin_base/nona/SpaceTransform.cpp.omv~	2016-03-23 12:32:27.295881787 +0100
++++ hugin-2016.0.0/src/hugin_base/nona/SpaceTransform.cpp	2016-03-23 12:32:43.305786209 +0100
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "SpaceTransform.h"
++#include <cmath>
+ 
+ namespace HuginBase {
+ namespace Nona {
+@@ -103,7 +104,7 @@ void inv_radial( double x_dest, double y
+ 	rs	= rd;				
+ 	f 	= (((params.var3 * rs + params.var2) * rs + params.var1) * rs + params.var0) * rs;
+ 
+-	while( abs(f - rd) > R_EPS && iter++ < MAXITER )
++	while( std::abs(f - rd) > R_EPS && iter++ < MAXITER )
+ 	{
+ 		rs = rs - (f - rd) / ((( 4 * params.var3 * rs + 3 * params.var2) * rs  +
+ 						  2 * params.var1) * rs + params.var0);
+--- hugin-2016.0.0/src/tools/pano_modify.cpp.omv~	2016-03-23 12:32:48.185757078 +0100
++++ hugin-2016.0.0/src/tools/pano_modify.cpp	2016-03-23 12:34:02.735312054 +0100
+@@ -28,6 +28,7 @@
+ 
+ #include <fstream>
+ #include <sstream>
++#include <cmath>
+ #include <getopt.h>
+ #ifndef _WIN32
+ #include <unistd.h>
+@@ -743,13 +744,13 @@ int main(int argc, char* argv[])
+         pano.setOptions(opt);
+     };
+     // rotate complete pano
+-    if (abs(yaw) + abs(pitch) + abs(roll) > 0.0)
++    if (std::abs(yaw) + std::abs(pitch) + std::abs(roll) > 0.0)
+     {
+         std::cout << "Rotate panorama (yaw=" << yaw << ", pitch= " << pitch << ", roll=" << roll << ")" << std::endl;
+         HuginBase::RotatePanorama(pano, yaw, pitch, roll).run();
+     };
+     // translate complete pano
+-    if(abs(x) + abs(y) + abs(z) > 0.0)
++    if(std::abs(x) + std::abs(y) + std::abs(z) > 0.0)
+     {
+         std::cout << "Translate panorama (x=" << x << ", y=" << y << ", z=" << z << ")" << std::endl;
+         HuginBase::TranslatePanorama(pano, x, y, z).run();

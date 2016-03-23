@@ -2,13 +2,16 @@
 
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2015.0.0
-Release:	3
+Version:	2016.0.0
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Patch0:		hugin-2012.0.0-invalid-utf8.patch
+# abs() returns an int -- std::abs() retains the double
+# Thanks to clang for pointing it out!
+Patch1:		hugin-2016.0.0-fix-rounding-error.patch
 
 BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
@@ -78,7 +81,7 @@ desktop-file-install --vendor="" \
 %find_lang %{name} nona_gui %{name}.lang
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING INSTALL_cmake README README_JP TODO doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
+%doc AUTHORS COPYING INSTALL_cmake README TODO doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
 %{_datadir}/%{name}

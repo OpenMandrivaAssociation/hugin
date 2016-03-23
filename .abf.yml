@@ -1,6 +1,2 @@
-removed_sources:
-  hugin-2012.0.0.tar.bz2: 53f97d030716e66dc5a49c7e786686a9d5262b8d
-  hugin-2013.0.0.tar.bz2: 0e0689cf2ca0c4a2730cffe06380eda976b6772d
-  hugin-2014.0.0.tar.bz2: 7b4ae181f664b9e0a68f55f298cdaa210fa09aa9
 sources:
-  hugin-2015.0.0.tar.bz2: be7153a0791f2147153e93e8711912ef23b60b61
+  hugin-2016.0.0.tar.bz2: 6811e19f1c10da163e1c4228779beb4c12448db9
