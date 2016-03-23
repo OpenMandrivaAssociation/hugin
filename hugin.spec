@@ -38,6 +38,7 @@ BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(lapack)
 BuildRequires:	pkgconfig(python3)
+BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	perl-Image-ExifTool
 Requires:	enblend >= 3.2
 Requires:	libpano13-tools >= 2.9.18
