@@ -2,8 +2,8 @@
 
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2016.0.0
-Release:	3
+Version:	2016.2.0
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
@@ -57,7 +57,7 @@ pictures by combining multiple images.
 find . -type f -exec chmod 644 {} \;
 
 %build
-%ifarch %ix86
+%ifarch %{ix86}
 # work around buggy clang 3.8
 export CC=gcc
 export CXX=g++
