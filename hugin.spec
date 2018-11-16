@@ -37,6 +37,7 @@ BuildRequires:	pkgconfig(lapack)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	pkgconfig(libssh)
 BuildRequires:	perl-Image-ExifTool
 Requires:	enblend >= 3.2
 Requires:	libpano13-tools >= 2.9.18
