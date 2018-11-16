@@ -35,6 +35,7 @@ BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(lapack)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(lcms2)
+BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	perl-Image-ExifTool
 Requires:	enblend >= 3.2
 Requires:	libpano13-tools >= 2.9.18
@@ -46,8 +47,7 @@ span 360 degrees. Another common use is the creation of very high resolution
 pictures by combining multiple images. 
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
@@ -61,10 +61,10 @@ export CXX=g++
 
 %define Werror_cflags %{nil}
 %cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON
-%make
+%make_build
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 # menu entry
 desktop-file-install --vendor="" \
