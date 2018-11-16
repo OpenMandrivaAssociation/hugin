@@ -22,6 +22,7 @@ BuildRequires:	tiff-devel
 BuildRequires:  vigra-devel
 BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(exiv2)
+BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
