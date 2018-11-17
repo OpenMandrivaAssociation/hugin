@@ -80,7 +80,7 @@ desktop-file-install --vendor="" \
 %find_lang %{name} nona_gui %{name}.lang
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING INSTALL_cmake README TODO doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
+%doc AUTHORS INSTALL_cmake README TODO doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
 %{_datadir}/%{name}
