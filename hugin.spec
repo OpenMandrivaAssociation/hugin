@@ -3,7 +3,7 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2018.0.0
-Release:	2
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
@@ -49,7 +49,8 @@ span 360 degrees. Another common use is the creation of very high resolution
 pictures by combining multiple images. 
 
 %prep
-%autosetup -p1
+%setup -q
+%apply_patches
 
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
