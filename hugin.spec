@@ -55,11 +55,11 @@ pictures by combining multiple images.
 find . -type f -exec chmod 644 {} \;
 
 %build
-#ifarch %{ix86}
+%ifarch %{ix86}
 # work around buggy clang 3.8
-#export CC=gcc
-#export CXX=g++
-#endif
+export CC=gcc
+export CXX=g++
+%endif
 
 %define Werror_cflags %{nil}
 %cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON
