@@ -3,12 +3,13 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2019.0.0
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 Patch0:		hugin-2012.0.0-invalid-utf8.patch
+Patch1:		hugin-2019.0.0-exiv2-0.27.patch
 BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
 BuildRequires:	swig >= 2.0
@@ -55,18 +56,12 @@ pictures by combining multiple images.
 find . -type f -exec chmod 644 {} \;
 
 %build
-%ifarch %{ix86}
-# work around buggy clang 3.8
-export CC=gcc
-export CXX=g++
-%endif
-
 %define Werror_cflags %{nil}
-%cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON
-%make_build
+%cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON -G Ninja
+%ninja_build
 
 %install
-%make_install -C build
+%ninja_install -C build
 
 # menu entry
 desktop-file-install --vendor="" \
