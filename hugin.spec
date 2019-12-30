@@ -2,8 +2,8 @@
 
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2019.0.0
-Release:	3
+Version:	2019.2.0
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
