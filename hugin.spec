@@ -8,8 +8,7 @@ License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
-#Patch0:		hugin-2012.0.0-invalid-utf8.patch
-#Patch1:		hugin-2019.0.0-exiv2-0.27.patch
+
 BuildRequires:	cmake ninja
 BuildRequires:	desktop-file-utils
 BuildRequires:	swig >= 2.0
@@ -86,4 +85,3 @@ desktop-file-install --vendor="" \
 %{_iconsdir}/hicolor/*
 %{py_platsitedir}/*
 %{_mandir}/man?/*
-
