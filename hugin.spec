@@ -2,8 +2,8 @@
 
 Summary:	Panorama Tools GUI
 Name:		hugin
-Version:	2019.2.0
-Release:	5
+Version:	2020.0.0
+Release:	1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
@@ -78,10 +78,10 @@ desktop-file-install --vendor="" \
 %{_bindir}/*
 %{_libdir}/%{name}/lib*.so.*
 %{_datadir}/%{name}
-%{_datadir}/appdata/*
 %{_datadir}/applications/*.desktop
-%{_iconsdir}/gnome/48x48/mimetypes/gnome-mime-application-x-ptoptimizer-script.png
 %{_datadir}/mime/packages/hugin.xml
+%{_datadir}/metainfo/*
+%{_iconsdir}/gnome/48x48/mimetypes/application-x-ptoptimizer-script.png
 %{_iconsdir}/hicolor/*
 %{py_platsitedir}/*
 %{_mandir}/man?/*
