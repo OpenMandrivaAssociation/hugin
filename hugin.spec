@@ -3,11 +3,12 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2020.0.0
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
+Patch0:		hugin-openexr3.patch
 
 BuildRequires:	cmake ninja
 BuildRequires:	desktop-file-utils
@@ -55,6 +56,10 @@ pictures by combining multiple images.
 find . -type f -exec chmod 644 {} \;
 
 %build
+# fix from suse
+# Doesn't define the ZLIB::ZLIB target needed by OpenEXR 3
+rm CMakeModules/FindZLIB.cmake
+
 %define Werror_cflags %{nil}
 %cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON -G Ninja
 %ninja_build
