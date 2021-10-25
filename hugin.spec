@@ -56,6 +56,10 @@ pictures by combining multiple images.
 find . -type f -exec chmod 644 {} \;
 
 %build
+# fix from suse
+# Doesn't define the ZLIB::ZLIB target needed by OpenEXR 3
+rm CMakeModules/FindZLIB.cmake
+
 %define Werror_cflags %{nil}
 %cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON -G Ninja
 %ninja_build
