@@ -85,7 +85,7 @@ desktop-file-install --vendor="" \
 %{_datadir}/applications/*.desktop
 %{_datadir}/mime/packages/hugin.xml
 %{_datadir}/metainfo/*
-%{_iconsdir}/gnome/48x48/mimetypes/application-x-ptoptimizer-script.png
+#{_iconsdir}/gnome/48x48/mimetypes/application-x-ptoptimizer-script.png
 %{_iconsdir}/hicolor/*
 %{py_platsitedir}/*
 %{_mandir}/man?/*
