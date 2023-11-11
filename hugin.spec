@@ -8,7 +8,6 @@ License:	GPLv2+
 Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
-#Patch0:		hugin-2022-exiv2-0.28.patch
 
 BuildRequires:	cmake ninja
 BuildRequires:	desktop-file-utils
