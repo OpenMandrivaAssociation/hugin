@@ -9,6 +9,7 @@ Group:		Graphics
 Url:		http://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 
+BuildRequires:	gettext
 BuildRequires:	cmake ninja
 BuildRequires:	desktop-file-utils
 BuildRequires:	swig >= 2.0
