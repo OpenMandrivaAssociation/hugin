@@ -6,7 +6,7 @@ Version:	2023.0.0
 Release:	6
 License:	GPLv2+
 Group:		Graphics
-Url:		http://hugin.sourceforge.net
+Url:		https://hugin.sourceforge.net
 Source0:	http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
 
 BuildRequires:	gettext
