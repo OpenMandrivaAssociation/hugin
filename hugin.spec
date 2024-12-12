@@ -3,7 +3,7 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2024.0.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Graphics
 Url:		https://hugin.sourceforge.net
