@@ -1,9 +1,12 @@
 %define _disable_ld_no_undefined 1
 
+# BLAS lib
+%global blaslib flexiblas
+
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2024.0.1
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Graphics
 Url:		https://hugin.sourceforge.net
@@ -34,7 +37,7 @@ BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	pkgconfig(lapack)
+BuildRequires:	pkgconfig(%{blaslib})
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(sqlite3)
@@ -61,14 +64,19 @@ find . -type f -exec chmod 644 {} \;
 rm CMakeModules/FindZLIB.cmake
 
 %define Werror_cflags %{nil}
-%cmake -DCMAKE_SKIP_RPATH:BOOL=OFF -DBUILD_HSI=1 -DENABLE_LAPACK=ON -G Ninja
+%cmake \
+	-DCMAKE_SKIP_RPATH:BOOL=OFF \
+	-DBUILD_HSI=1 \
+	-DENABLE_LAPACK:BOOL=ON \
+	-G Ninja
 %ninja_build
 
 %install
 %ninja_install -C build
 
 # menu entry
-desktop-file-install --vendor="" \
+desktop-file-install \
+	--vendor="" \
 	--remove-category="Application" \
 	--add-category="X-MandrivaLinux-CrossDesktop;" \
 	--add-category="Photography" \
