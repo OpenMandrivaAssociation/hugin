@@ -1,12 +1,9 @@
 %define _disable_ld_no_undefined 1
 
-# BLAS lib
-%global blaslib flexiblas
-
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2024.0.1
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		Graphics
 Url:		https://hugin.sourceforge.net
@@ -37,7 +34,6 @@ BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	pkgconfig(%{blaslib})
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(sqlite3)
@@ -67,7 +63,6 @@ rm CMakeModules/FindZLIB.cmake
 %cmake \
 	-DCMAKE_SKIP_RPATH:BOOL=OFF \
 	-DBUILD_HSI=1 \
-	-DENABLE_LAPACK:BOOL=ON \
 	-G Ninja
 %ninja_build
 
