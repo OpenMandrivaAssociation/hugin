@@ -3,11 +3,12 @@
 Summary:	Panorama Tools GUI
 Name:		hugin
 Version:	2024.0.1
-Release:	5
+Release:	6
 License:	GPLv2+
 Group:		Graphics
 Url:		https://hugin.sourceforge.net
 Source0:	https://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
+Patch:		boost-1.89.patch
 
 BuildRequires:	gettext
 BuildRequires:	cmake ninja
