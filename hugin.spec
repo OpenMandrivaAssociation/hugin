@@ -50,6 +50,8 @@ pictures by combining multiple images.
 
 %prep
 %autosetup -p1
+# Python 3 removed PyInt_AsLong
+sed -i 's/PyInt_AsLong/PyLong_AsLong/g' src/hugin_script_interface/hpi_classes.cpp
 
 # Fix error: non-readable in debug package, we get 1000+ errors from rpmlint
 find . -type f -exec chmod 644 {} \;
