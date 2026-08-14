@@ -60,6 +60,9 @@ find . -type f -exec chmod 644 {} \;
 rm CMakeModules/FindZLIB.cmake
 
 %define Werror_cflags %{nil}
+# libpano13/panorama.h uses uint32_t without including stdint.h
+export CFLAGS="%{optflags} -include stdint.h"
+export CXXFLAGS="%{optflags} -include stdint.h"
 %cmake \
 	-DCMAKE_SKIP_RPATH:BOOL=OFF \
 	-DBUILD_HSI=1 \
